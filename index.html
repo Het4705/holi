@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Holi</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+    <div class="main" id="main-box">
+        <div>
+            <h1 id="typing"></h1> <!-- Empty h1 element for typing effect -->
+            <div class="box" id="box1">
+                <h2 onclick="Play()" id="color" style="display: none;"> <!-- Hidden initially -->
+                    Colors
+                </h2>
+            </div>
+            <br>
+            <br>
+            <p id="hidden2" style="display: none; color: rgb(86, 85, 85);">Click Colors</p>
+        </div>
+    </div>
+    <div id="gif" >
+        <img src="holi.jpg" alt="" srcset="">
+        <h1 id="holi" style="display:none
+    ;">
+            Happy Holi
+        </h1>
+        <a href="https://www.linkedin.com/in/het-patel-7ba27924b/">
+            <p style="font-size: larger;">From Het</p>
+        </a>
+    </div>
+    <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
+
+    <script>
+        // JavaScript for typing effect
+        const text1 = "Life is Boring........."; // First text to be typed
+        const text2 = "Add Some "; // Second text to be typed
+        let index = 0;
+
+        function Play() {
+            var sound = new Audio("fagan.mp3");
+            sound.play()
+            document.getElementById("main-box").style.display = "none";
+            document.getElementById("gif").style.display = "flex"
+            document.getElementById("holi").style.display = "block"
+        }
+
+        function typeText1() {
+            if (index < text1.length) {
+                document.getElementById('typing').innerHTML += text1.charAt(index);
+                index++;
+                setTimeout(typeText1, 100); // Adjust typing speed here (milliseconds)
+            } else {
+                index = 0; // Reset index for next text
+                document.getElementById('typing').innerHTML += "<br>"
+                setTimeout(typeText2, 100); // Wait for 1 second before typing next text
+            }
+        }
+
+        function typeText2() {
+            if (index < text2.length) {
+                document.getElementById('typing').innerHTML += text2.charAt(index);
+                index++;
+                setTimeout(typeText2, 100); // Adjust typing speed here (milliseconds)
+            } else {
+                setTimeout(() => {
+                    document.getElementById('color').style.display = "inline"; // Show h2 element
+                    document.getElementById('box1').style.display = "flex"; // Show h2 element
+                    document.getElementById('hidden2').style.display = "inline"; // Show h2 element
+                }, 50);
+            }
+        }
+
+        window.onload = typeText1; // Start typing when the window loads
+        document.addEventListener("DOMContentLoaded", function () {
+            var holiText = document.getElementById("holi").textContent;
+            var coloredText = '';
+            for (var i = 0; i < holiText.length; i++) {
+                coloredText += '<span style="color: ' + getRandomColor() + ';">' + holiText[i] + '</span>';
+            }
+            document.getElementById("holi").innerHTML = coloredText;
+            document.getElementById("holi").style.display = "block";
+        });
+
+        function getRandomColor() {
+            var letters = '0123456789ABCDEF';
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+    </script>
+</body>
+
+</html>
